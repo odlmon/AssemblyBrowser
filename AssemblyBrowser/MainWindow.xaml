@@ -7,6 +7,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <TreeView Name="treeView">
+            <TextBox Name="textBox"></TextBox>
+        </TreeView>
     </Grid>
 </Window>
