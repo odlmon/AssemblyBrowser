@@ -4,11 +4,38 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AssemblyBrowser"
+        xmlns:assemblyReader="clr-namespace:AssemblyReader;assembly=AssemblyReader"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <TreeView Name="treeView">
-            <TextBox Name="textBox"></TextBox>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="Open" Command="{Binding OpenCommand}"></MenuItem>
+            </MenuItem>
+        </Menu>
+        <TreeView DockPanel.Dock="Top" Name="treeView">
+            <TreeView.Resources>
+                <HierarchicalDataTemplate DataType="{x:Type assemblyReader:AssemblyInfo}">
+                    <TreeViewItem Header="{Binding Path=Name}">
+                        <TreeViewItem Header="Namespaces"
+                                      ItemsSource="{Binding Path=Namespaces}" />
+                    </TreeViewItem>
+                </HierarchicalDataTemplate>
+                <HierarchicalDataTemplate DataType="{x:Type assemblyReader:NamespaceInfo}">
+                    <TreeViewItem Header="{Binding Path=Name}">
+                        <TreeViewItem Header="Classes"
+                                      ItemsSource="{Binding Path=Classes}" />
+                    </TreeViewItem>
+                </HierarchicalDataTemplate>
+                <HierarchicalDataTemplate DataType="{x:Type assemblyReader:ClassInfo}"
+                                          ItemsSource="{Binding Path=Members}">
+                    <TextBlock Text="{Binding Path=Name}" />
+                </HierarchicalDataTemplate>
+                <DataTemplate DataType="{x:Type assemblyReader:MemberInfo}">
+                    <TreeViewItem Header="{Binding Name}"
+                                  ItemsSource="{Binding Values}" />
+                </DataTemplate>
+            </TreeView.Resources>
         </TreeView>
-    </Grid>
+    </DockPanel>
 </Window>
