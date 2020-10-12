@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssemblyBrowser", "Assembly
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssemblyReader", "AssemblyReader\AssemblyReader.csproj", "{564672DF-E375-46E2-B4B1-BA5144C575B5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssemblyReaderTester", "AssemblyReaderTester\AssemblyReaderTester.csproj", "{57654D33-FF0D-4184-9403-752939A795B2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{564672DF-E375-46E2-B4B1-BA5144C575B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{564672DF-E375-46E2-B4B1-BA5144C575B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{564672DF-E375-46E2-B4B1-BA5144C575B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57654D33-FF0D-4184-9403-752939A795B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57654D33-FF0D-4184-9403-752939A795B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57654D33-FF0D-4184-9403-752939A795B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57654D33-FF0D-4184-9403-752939A795B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
