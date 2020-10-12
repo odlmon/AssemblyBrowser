@@ -13,7 +13,8 @@
                 <MenuItem Header="Open" Command="{Binding OpenCommand}"></MenuItem>
             </MenuItem>
         </Menu>
-        <TreeView DockPanel.Dock="Top" Name="treeView">
+        <Label DockPanel.Dock="Top" Content="{Binding AssemblyFile, UpdateSourceTrigger=PropertyChanged}"></Label>
+        <TreeView DockPanel.Dock="Top" ItemsSource="{Binding AssemblyInfo, UpdateSourceTrigger=PropertyChanged}">
             <TreeView.Resources>
                 <HierarchicalDataTemplate DataType="{x:Type assemblyReader:AssemblyInfo}">
                     <TreeViewItem Header="{Binding Path=Name}">

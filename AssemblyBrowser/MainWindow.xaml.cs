@@ -1,9 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Windows;
-using System.Windows.Controls;
-
-using AssemblyReader;
+﻿using System.Windows;
 
 namespace AssemblyBrowser
 {
@@ -15,10 +10,7 @@ namespace AssemblyBrowser
         public MainWindow()
         {
             InitializeComponent();
-            AssemblyInfo assemblyInfo = AssemblyReader.AssemblyReader.GetAssemblyInfo(
-                    @"C:\Users\Dmitriy\Projects\CSharp\Test\Test\bin\Debug\netcoreapp3.1\Test.dll");
-            var list = new ObservableCollection<AssemblyInfo> {assemblyInfo};
-            treeView.ItemsSource = list;
+            DataContext = new ViewModel(new Model());
         }
     }
 }
