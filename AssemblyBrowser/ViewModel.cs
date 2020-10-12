@@ -11,18 +11,13 @@ namespace AssemblyBrowser
     {
         private Model _model;
 
-        public ViewModel(Model model)
-        {
-            _model = model;
-        }
-
         public string AssemblyFile
         {
             get => _model.AssemblyFile;
             set
             {
                 _model.AssemblyFile = value;
-                this.AssemblyInfo = new ObservableCollection<AssemblyInfo>
+                AssemblyInfo = new ObservableCollection<AssemblyInfo>
                 {
                     AssemblyReader.AssemblyReader.GetAssemblyInfo(_model.AssemblyFile)
                 };
@@ -57,7 +52,12 @@ namespace AssemblyBrowser
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        
+
+        public ViewModel(Model model)
+        {
+            _model = model;
+        }
+
         public void OnPropertyChanged([CallerMemberName]string prop = "")
         {
             if (PropertyChanged != null)
