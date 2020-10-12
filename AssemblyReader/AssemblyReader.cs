@@ -1,10 +1,9 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Reflection;
 
 namespace AssemblyReader
 {
-    public class AssemblyReader
+    public static class AssemblyReader
     {
         private static BindingFlags BindingFlags = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static |
                                                    BindingFlags.Instance;
@@ -17,28 +16,17 @@ namespace AssemblyReader
             {
                 NamespaceInfo namespaceInfo = new NamespaceInfo(n);
                 assemblyInfo.Namespaces.Add(namespaceInfo);
-                Console.WriteLine(n);
                 a.GetTypes().Where(t => t.IsClass && t.Namespace == n).ToList().ForEach(
                     c =>
                     {
                         ClassInfo classInfo = new ClassInfo(c.ToString());
                         namespaceInfo.Classes.Add(classInfo);
-                        Console.WriteLine("\t" + c);
                         c.GetFields(BindingFlags).ToList().ForEach(f =>
-                        {
-                            classInfo.Fields.Add(f.ToString());
-                            Console.WriteLine("\t\t" + f);
-                        });
+                            classInfo.Members.First(m => m.Name == "Fields").Values.Add(f.ToString()));
                         c.GetProperties(BindingFlags).ToList().ForEach(p =>
-                        {
-                            classInfo.Properties.Add(p.ToString());
-                            Console.WriteLine("\t\t" + p);
-                        });
+                            classInfo.Members.First(m => m.Name == "Properties").Values.Add(p.ToString()));
                         c.GetMethods(BindingFlags).ToList().ForEach(m =>
-                        {
-                            classInfo.Methods.Add(m.ToString());
-                            Console.WriteLine("\t\t" + m);
-                        });
+                            classInfo.Members.First(m => m.Name == "Methods").Values.Add(m.ToString()));
                     });
             });
 
