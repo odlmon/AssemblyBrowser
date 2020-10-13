@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 
 namespace AssemblyReader
 {
@@ -25,8 +26,19 @@ namespace AssemblyReader
                             classInfo.Members.First(m => m.Name == "Fields").Values.Add(f.ToString()));
                         c.GetProperties(BindingFlags).ToList().ForEach(p =>
                             classInfo.Members.First(m => m.Name == "Properties").Values.Add(p.ToString()));
-                        c.GetMethods(BindingFlags).ToList().ForEach(m =>
+                        c.GetMethods(BindingFlags).Where(m => !m.IsDefined(typeof(ExtensionAttribute))).ToList().ForEach(m =>
                             classInfo.Members.First(m => m.Name == "Methods").Values.Add(m.ToString()));
+                    });
+                a.GetTypes().Where(t => t.IsClass && t.Namespace == n).ToList().ForEach(
+                    c =>
+                    {
+                        c.GetMethods().Where(m => m.IsDefined(typeof(ExtensionAttribute), false)).ToList().ForEach(m =>
+                        {
+                            ClassInfo extendedType = null;
+                            assemblyInfo.Namespaces.ToList().ForEach(n =>
+                                extendedType = n.Classes.First(c => c.Name == m.GetParameters()[0].ParameterType.ToString()));
+                            extendedType?.Members.First(m => m.Name == "Methods").Values.Add(m.ToString());
+                        });
                     });
             });
 
