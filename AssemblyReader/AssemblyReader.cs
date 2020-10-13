@@ -12,7 +12,7 @@ namespace AssemblyReader
         {
             Assembly a = Assembly.LoadFrom(assemblyFile);
             AssemblyInfo assemblyInfo = new AssemblyInfo(a.GetName().Name);
-            a.GetTypes().Select(t => t.Namespace).Distinct().ToList().ForEach(n =>
+            a.GetTypes().Select(t => t.Namespace).Distinct().Where(n => n != null).ToList().ForEach(n =>
             {
                 NamespaceInfo namespaceInfo = new NamespaceInfo(n);
                 assemblyInfo.Namespaces.Add(namespaceInfo);
